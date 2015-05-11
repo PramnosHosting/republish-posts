@@ -31,9 +31,9 @@ function rpPostExtrabox($post)
 
     <p>
         <label><strong>Choose the time</strong></label><br>
-        <input type="number" class="small-text" id="rpRepublisHour" name="rpRepublisHour" min="0" max="24" step="1" value="<?php echo date('H', $rpRepublishDate);?>">:
-        <input type="number" class="small-text" id="rpRepublisMinute" name="rpRepublisMinute" min="0" max="60" step="1" value="<?php echo date('i', $rpRepublishDate);?>">:
-        <input type="number" class="small-text" id="rpRepublisSecond" name="rpRepublisSecond" min="0" max="60" step="1" value="<?php echo date('s', $rpRepublishDate);?>">
+        <input type="number" class="small-text" id="rpRepublisHour" name="rpRepublisHour" min="0" max="24" step="1" value="<?php if ($dateToDisplay != ''): echo date('H', $rpRepublishDate); else: echo date('H'); endif; ?>">:
+        <input type="number" class="small-text" id="rpRepublisMinute" name="rpRepublisMinute" min="0" max="60" step="1" value="<?php if ($dateToDisplay != ''): echo date('i', $rpRepublishDate); else: echo date('i'); endif; ?>">:
+        <input type="number" class="small-text" id="rpRepublisSecond" name="rpRepublisSecond" min="0" max="60" step="1" value="<?php if ($dateToDisplay != ''): echo date('s', $rpRepublishDate); else: echo '00'; endif; ?>">
     </p>
 
 
