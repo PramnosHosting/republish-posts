@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:	Republish Posts
- * Description:	Allows the author to set republish post dates
+ * Description:	Allows a Wordpress administrator to Schedule a post to be republished.
  * Plugin URI:  https://github.com/PramnosHosting/republish-posts
  * Version:     1.0
  * Author:	Pramnos Hosting Ltd.
