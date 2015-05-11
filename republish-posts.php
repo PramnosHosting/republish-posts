@@ -29,6 +29,7 @@ function rpInit()
     add_action('save_post_post', 'rpSavePostMeta');
 }
 
+add_filter( 'cron_schedules', 'rpAddTwentyMinutesSchedule' );
 add_action( 'plugins_loaded', 'rpInit' );
 add_action( 'wp', 'rpSetupSchedule' );
 add_action( 'rpUpdatePostsHourlyEvent', 'rpUpdatePostsHourly' );
@@ -50,7 +51,9 @@ function rpDeactivation()
 function rpSetupSchedule()
 {
     if ( ! wp_next_scheduled( 'rpUpdatePostsHourlyEvent' ) ) {
-            wp_schedule_event( time(), 'hourly', 'rpUpdatePostsHourlyEvent');
+        wp_schedule_event(
+            time(), 'in_per_twenty_minute', 'rpUpdatePostsHourlyEvent'
+        );
     }
 }
 
@@ -86,4 +89,20 @@ function rpUpdatePostsHourly()
             wp_update_post( $my_post );
         }
     }
+}
+
+/**
+ * Add a wp cron schedule to run every twenty minutes
+ * @wp-hook cron_schedules
+ * @param   array $schedules
+ * @return  array
+ */
+function rpAddTwentyMinutesSchedule( $schedules )
+{
+    $schedules['in_per_twenty_minute'] = array(
+        'interval' => 1200,
+        'display' => __('Once in twenty minutes')
+    );
+
+    return $schedules;
 }
